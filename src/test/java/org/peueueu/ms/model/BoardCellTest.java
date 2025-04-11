@@ -1,6 +1,7 @@
 package org.peueueu.ms.model;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,6 +14,7 @@ public class BoardCellTest {
     }
 
     @Test
+    @DisplayName("should add adjacent neighbors")
     void addNeighbor_AdjacentNeighbor_True() {
         BoardCell neighbor = new BoardCell(2, 3);
         boolean isNeighbor = boardCell.addNeighbor(neighbor);
@@ -21,6 +23,7 @@ public class BoardCellTest {
     }
 
     @Test
+    @DisplayName("should add diagonal neighbors")
     void addNeighbor_DiagonalNeighbor_True() {
         BoardCell neighbor = new BoardCell(2, 2);
         boolean isNeighbor = boardCell.addNeighbor(neighbor);
@@ -28,9 +31,10 @@ public class BoardCellTest {
         assertTrue(isNeighbor);
     }
     @Test
+    @DisplayName("shouldn't add not neighbors")
     void addNeighbor_NotNeighbor_False() {
-        BoardCell neighbor = new BoardCell(2, 1);
-        boolean isNeighbor = boardCell.addNeighbor(neighbor);
+        BoardCell notNeighbor = new BoardCell(2, 1);
+        boolean isNeighbor = boardCell.addNeighbor(notNeighbor);
 
         assertFalse(isNeighbor);
     }
