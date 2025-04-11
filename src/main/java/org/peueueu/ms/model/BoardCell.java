@@ -68,6 +68,10 @@ public class BoardCell {
         return this.isFlagged;
     }
 
+    boolean getIsOpen() {
+        return this.isOpen;
+    }
+
     void setMine() {
         if(!this.hasMine) {
             this.hasMine = true;

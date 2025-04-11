@@ -99,7 +99,18 @@ public class BoardCellTest {
     void open_OpenAllSafeNeighbors_True() {
         this.boardCell.addNeighbor(this.adjacentNeighbor);
         this.adjacentNeighbor.addNeighbor(this.neighborFromAdjacentNeighbor);
+        this.boardCell.open();
+        assertTrue(this.adjacentNeighbor.getIsOpen() && this.neighborFromAdjacentNeighbor.getIsOpen());
+    }
 
-        assertTrue(this.boardCell.open());
+    @Test
+    @DisplayName("Should stop when neighbor is not safe to open")
+    void open_NotOpenUnsafeNeighbor_False() {
+        this.boardCell.addNeighbor(this.adjacentNeighbor);
+        this.adjacentNeighbor.addNeighbor(this.neighborFromAdjacentNeighbor);
+        this.neighborFromAdjacentNeighbor.setMine();
+
+        this.boardCell.open();
+        assertTrue(this.adjacentNeighbor.getIsOpen() && !this.neighborFromAdjacentNeighbor.getIsOpen());
     }
 }
