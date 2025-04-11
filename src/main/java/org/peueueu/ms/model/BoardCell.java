@@ -1,5 +1,7 @@
 package org.peueueu.ms.model;
 
+import org.peueueu.ms.exception.MineExplosionException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,7 @@ public class BoardCell {
     private final int column;
     private boolean isOpen = false;
     private boolean hasMine;
-    private boolean isChecked = false;
+    private boolean isFlagged = false;
 
     private List<BoardCell> neighbors = new ArrayList<>();
 
@@ -36,4 +38,40 @@ public class BoardCell {
             return false;
         }
     }
+
+    void toggleFlag() {
+        if(!this.isOpen) {
+            this.isFlagged = !this.isFlagged;
+        }
+    }
+
+    boolean open() {
+        if(!this.isOpen && !this.isFlagged) {
+            this.isOpen = true;
+            if(this.hasMine) {
+                throw new MineExplosionException();
+            }
+            if(this.safeNeighbors()) {
+                this.neighbors.forEach(BoardCell::open);
+            }
+
+            return true;
+        }
+      return false;
+    }
+
+    boolean safeNeighbors() {
+        return this.neighbors.stream().noneMatch(neighbor -> neighbor.hasMine);
+    }
+
+    boolean getIsFlagged() {
+        return this.isFlagged;
+    }
+
+    void setMine() {
+        if(!this.hasMine) {
+            this.hasMine = true;
+        }
+    }
+
 }
