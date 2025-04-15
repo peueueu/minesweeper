@@ -88,7 +88,7 @@ public class BoardView {
                 throw new ExitGameException(exitGameMessage());
             }
 
-            if (input.equals("1") || input.equals("2")) {
+            if (input.trim().equals("1") || input.trim().equals("2")) {
                 return input.toLowerCase();
             }
             System.out.println("Clouded, your choice is. '1' or '2' you must choose.");

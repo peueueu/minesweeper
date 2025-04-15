@@ -69,8 +69,18 @@ public class Board {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("   ");
+        for(int columnIdx = 0; columnIdx < columns; columnIdx++) {
+            sb.append(" ");
+            sb.append(columnIdx);
+            sb.append(" ");
+        }
+        sb.append("\n");
         int idx = 0;
-        for(int row = 0; row < rows; row++) {
+        for(int rowIdx = 0; rowIdx < rows; rowIdx++) {
+            sb.append(" ");
+            sb.append(rowIdx);
+            sb.append(" ");
             for(int column = 0; column < columns; column++) {
                 sb.append(" ");
                 sb.append(cellList.get(idx));
