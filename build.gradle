@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'application'
 }
 
 group = 'org.peueueu.ms'
@@ -15,10 +14,12 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
-test {
-    useJUnitPlatform()
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17) // Example
+    }
 }
 
-application {
-    mainClass = "org.peueueu.ms.Main"
+test {
+    useJUnitPlatform()
 }
